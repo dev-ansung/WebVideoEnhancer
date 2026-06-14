@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Player Studio - Video.js v10</title>
+    
+    <!-- Tailwind CSS for Workspace Layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Video.js HTML Custom Elements (v10) -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@videojs/html/cdn/video.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <!-- Studio layout dynamically injected here -->
+    <div id="studio-mount"></div>
+
+    <!-- Production-Ready Application Logic -->
+    <script>
+        const isLocal = window.location.hostname === 'localhost' || window.location.protocol === 'file:';
+        const scriptUrl = isLocal ? 'dist/studio.js' : 'https://cdn.jsdelivr.net/gh/dev-ansung/WebVideoEnhancer@main/dist/studio.js';
+        const script = document.createElement('script');
+        script.src = scriptUrl;
+        script.onload = () => {
+            if (window.PlayerStudio && window.PlayerStudio.TEMPLATE) {
+                document.getElementById('studio-mount').innerHTML = window.PlayerStudio.TEMPLATE;
+                
+                window.App = new window.PlayerStudio();
+                window.App.init();
+            } else {
+                console.error("PlayerStudio template failed to load.");
+            }
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

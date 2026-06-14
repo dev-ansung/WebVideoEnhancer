@@ -1,0 +1,20 @@
+{
+  "name": "video-enhancer-studio",
+  "version": "1.0.0",
+  "description": "Advanced Player Studio",
+  "main": "dist/studio.js",
+  "scripts": {
+    "build": "mkdir -p dist && esbuild src/index.ts --bundle --outfile=dist/studio.js --target=es2022 && cp userscript.js dist/",
+    "test": "playwright test",
+    "test:update": "playwright test --update-snapshots",
+    "demo": "tsx scripts/generate_demo.ts",
+    "postinstall": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.3",
+    "esbuild": "^0.28.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
